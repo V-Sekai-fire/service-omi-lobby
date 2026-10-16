@@ -21,7 +21,6 @@ defmodule Uro.Application do
           Uro.Repo,
           Uro.Endpoint,
           Uro.VSekai.ZoneJanitor,
-          Uro.AgentTasks.Janitor,
           lobby_poller(),
           Uro.Pow.DetsCache,
           {Phoenix.PubSub, [name: Uro.PubSub, adapter: Phoenix.PubSub.PG2]},

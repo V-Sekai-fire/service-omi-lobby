@@ -34,7 +34,7 @@ importers:
         version: 5.51.1(@tanstack/react-query@5.51.1(react@19.0.0-rc-3f1436cca1-20240516))(react@19.0.0-rc-3f1436cca1-20240516)
       '@tanstack/react-query-next-experimental':
         specifier: ^5.51.1
-        version: 5.51.1(@tanstack/react-query@5.51.1(react@19.0.0-rc-3f1436cca1-20240516))(next@14.3.0-canary.70(@playwright/test@1.59.1)(babel-plugin-react-compiler@0.0.0-experimental-592953e-20240517)(react-dom@19.0.0-rc-3f1436cca1-20240516(react@19.0.0-rc-3f1436cca1-20240516))(react@19.0.0-rc-3f1436cca1-20240516))(react@19.0.0-rc-3f1436cca1-20240516)
+        version: 5.51.1(@tanstack/react-query@5.51.1(react@19.0.0-rc-3f1436cca1-20240516))(next@14.3.0-canary.70(babel-plugin-react-compiler@0.0.0-experimental-592953e-20240517)(react-dom@19.0.0-rc-3f1436cca1-20240516(react@19.0.0-rc-3f1436cca1-20240516))(react@19.0.0-rc-3f1436cca1-20240516))(react@19.0.0-rc-3f1436cca1-20240516)
       '@types/cloudflare-turnstile':
         specifier: ^0.1.5
         version: 0.1.5
@@ -49,10 +49,10 @@ importers:
         version: 0.379.0(react@19.0.0-rc-3f1436cca1-20240516)
       next:
         specifier: 14.3.0-canary.70
-        version: 14.3.0-canary.70(@playwright/test@1.59.1)(babel-plugin-react-compiler@0.0.0-experimental-592953e-20240517)(react-dom@19.0.0-rc-3f1436cca1-20240516(react@19.0.0-rc-3f1436cca1-20240516))(react@19.0.0-rc-3f1436cca1-20240516)
+        version: 14.3.0-canary.70(babel-plugin-react-compiler@0.0.0-experimental-592953e-20240517)(react-dom@19.0.0-rc-3f1436cca1-20240516(react@19.0.0-rc-3f1436cca1-20240516))(react@19.0.0-rc-3f1436cca1-20240516)
       next-runtime-env:
         specifier: 3.x
-        version: 3.3.0(next@14.3.0-canary.70(@playwright/test@1.59.1)(babel-plugin-react-compiler@0.0.0-experimental-592953e-20240517)(react-dom@19.0.0-rc-3f1436cca1-20240516(react@19.0.0-rc-3f1436cca1-20240516))(react@19.0.0-rc-3f1436cca1-20240516))(react@19.0.0-rc-3f1436cca1-20240516)
+        version: 3.3.0(next@14.3.0-canary.70(babel-plugin-react-compiler@0.0.0-experimental-592953e-20240517)(react-dom@19.0.0-rc-3f1436cca1-20240516(react@19.0.0-rc-3f1436cca1-20240516))(react@19.0.0-rc-3f1436cca1-20240516))(react@19.0.0-rc-3f1436cca1-20240516)
       postcss-rename:
         specifier: ^0.6.1
         version: 0.6.1(postcss@8.4.39)
@@ -93,9 +93,6 @@ importers:
       '@hey-api/openapi-ts':
         specifier: ^0.46.3
         version: 0.46.3(typescript@5.5.3)
-      '@playwright/test':
-        specifier: ^1.59.1
-        version: 1.59.1
       '@types/jsonwebtoken':
         specifier: ^9.0.6
         version: 9.0.6
@@ -529,11 +526,6 @@ packages:
   '@pkgr/core@0.2.9':
     resolution: {integrity: sha512-QNqXyfVS2wm9hweSYD2O7F0G06uurj9kZ96TRQE5Y9hU7+tgdZwIkbAKc5Ocy1HxEY2kuDQa6cQ1WRs/O5LFKA==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
-
-  '@playwright/test@1.59.1':
-    resolution: {integrity: sha512-PG6q63nQg5c9rIi4/Z5lR5IVF7yU5MqmKaPOe0HSc0O2cX1fPi96sUQu5j7eo4gKCkB2AnNGoWt7y4/Xx3Kcqg==}
-    engines: {node: '>=18'}
-    hasBin: true
 
   '@radix-ui/primitive@1.1.0':
     resolution: {integrity: sha512-4Z8dn6Upk0qk4P74xBhZ6Hd/w0mPEzOOLxy4xiPXOXqjF7jZS0VAKk7/x/H6FyY2zCkYJqePf1G5KmkmNJ4RBA==}
@@ -1868,11 +1860,6 @@ packages:
     resolution: {integrity: sha512-V/JgOLFCS+R6Vcq0slCuaeWEdNC3ouDlJMNIsacH2VtALiu9mV4LPrHc5cDl8k5aw6J8jwgWWpiTo5RYhmIzvg==}
     engines: {node: '>= 8'}
 
-  fsevents@2.3.2:
-    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
-    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
-    os: [darwin]
-
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -2507,8 +2494,6 @@ packages:
     peerDependenciesMeta:
       '@opentelemetry/api':
         optional: true
-      '@playwright/test':
-        optional: true
       babel-plugin-react-compiler:
         optional: true
       sass:
@@ -2707,16 +2692,6 @@ packages:
 
   pkg-types@2.3.0:
     resolution: {integrity: sha512-SIqCzDRg0s9npO5XQ3tNZioRY1uK06lA41ynBC1YmFTmnY6FjUjVt6s4LoADmwoig1qqD0oK8h1p/8mlMx8Oig==}
-
-  playwright-core@1.59.1:
-    resolution: {integrity: sha512-HBV/RJg81z5BiiZ9yPzIiClYV/QMsDCKUyogwH9p3MCP6IYjUFu/MActgYAvK0oWyV9NlwM3GLBjADyWgydVyg==}
-    engines: {node: '>=18'}
-    hasBin: true
-
-  playwright@1.59.1:
-    resolution: {integrity: sha512-C8oWjPR3F81yljW9o5OxcWzfh6avkVwDD2VYdwIGqTkl+OGFISgypqzfu7dOe4QNLL2aqcWBmI3PMtLIK233lw==}
-    engines: {node: '>=18'}
-    hasBin: true
 
   pluralize@8.0.0:
     resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
@@ -3825,10 +3800,6 @@ snapshots:
 
   '@pkgr/core@0.2.9': {}
 
-  '@playwright/test@1.59.1':
-    dependencies:
-      playwright: 1.59.1
-
   '@radix-ui/primitive@1.1.0': {}
 
   '@radix-ui/react-compose-refs@1.1.0(@types/react@18.3.3)(react@19.0.0-rc-3f1436cca1-20240516)':
@@ -3982,10 +3953,10 @@ snapshots:
       '@tanstack/react-query': 5.51.1(react@19.0.0-rc-3f1436cca1-20240516)
       react: 19.0.0-rc-3f1436cca1-20240516
 
-  '@tanstack/react-query-next-experimental@5.51.1(@tanstack/react-query@5.51.1(react@19.0.0-rc-3f1436cca1-20240516))(next@14.3.0-canary.70(@playwright/test@1.59.1)(babel-plugin-react-compiler@0.0.0-experimental-592953e-20240517)(react-dom@19.0.0-rc-3f1436cca1-20240516(react@19.0.0-rc-3f1436cca1-20240516))(react@19.0.0-rc-3f1436cca1-20240516))(react@19.0.0-rc-3f1436cca1-20240516)':
+  '@tanstack/react-query-next-experimental@5.51.1(@tanstack/react-query@5.51.1(react@19.0.0-rc-3f1436cca1-20240516))(next@14.3.0-canary.70(babel-plugin-react-compiler@0.0.0-experimental-592953e-20240517)(react-dom@19.0.0-rc-3f1436cca1-20240516(react@19.0.0-rc-3f1436cca1-20240516))(react@19.0.0-rc-3f1436cca1-20240516))(react@19.0.0-rc-3f1436cca1-20240516)':
     dependencies:
       '@tanstack/react-query': 5.51.1(react@19.0.0-rc-3f1436cca1-20240516)
-      next: 14.3.0-canary.70(@playwright/test@1.59.1)(babel-plugin-react-compiler@0.0.0-experimental-592953e-20240517)(react-dom@19.0.0-rc-3f1436cca1-20240516(react@19.0.0-rc-3f1436cca1-20240516))(react@19.0.0-rc-3f1436cca1-20240516)
+      next: 14.3.0-canary.70(babel-plugin-react-compiler@0.0.0-experimental-592953e-20240517)(react-dom@19.0.0-rc-3f1436cca1-20240516(react@19.0.0-rc-3f1436cca1-20240516))(react@19.0.0-rc-3f1436cca1-20240516)
       react: 19.0.0-rc-3f1436cca1-20240516
 
   '@tanstack/react-query@5.51.1(react@19.0.0-rc-3f1436cca1-20240516)':
@@ -5529,9 +5500,6 @@ snapshots:
     dependencies:
       minipass: 3.3.6
 
-  fsevents@2.3.2:
-    optional: true
-
   fsevents@2.3.3:
     optional: true
 
@@ -6157,12 +6125,12 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  next-runtime-env@3.3.0(next@14.3.0-canary.70(@playwright/test@1.59.1)(babel-plugin-react-compiler@0.0.0-experimental-592953e-20240517)(react-dom@19.0.0-rc-3f1436cca1-20240516(react@19.0.0-rc-3f1436cca1-20240516))(react@19.0.0-rc-3f1436cca1-20240516))(react@19.0.0-rc-3f1436cca1-20240516):
+  next-runtime-env@3.3.0(next@14.3.0-canary.70(babel-plugin-react-compiler@0.0.0-experimental-592953e-20240517)(react-dom@19.0.0-rc-3f1436cca1-20240516(react@19.0.0-rc-3f1436cca1-20240516))(react@19.0.0-rc-3f1436cca1-20240516))(react@19.0.0-rc-3f1436cca1-20240516):
     dependencies:
-      next: 14.3.0-canary.70(@playwright/test@1.59.1)(babel-plugin-react-compiler@0.0.0-experimental-592953e-20240517)(react-dom@19.0.0-rc-3f1436cca1-20240516(react@19.0.0-rc-3f1436cca1-20240516))(react@19.0.0-rc-3f1436cca1-20240516)
+      next: 14.3.0-canary.70(babel-plugin-react-compiler@0.0.0-experimental-592953e-20240517)(react-dom@19.0.0-rc-3f1436cca1-20240516(react@19.0.0-rc-3f1436cca1-20240516))(react@19.0.0-rc-3f1436cca1-20240516)
       react: 19.0.0-rc-3f1436cca1-20240516
 
-  next@14.3.0-canary.70(@playwright/test@1.59.1)(babel-plugin-react-compiler@0.0.0-experimental-592953e-20240517)(react-dom@19.0.0-rc-3f1436cca1-20240516(react@19.0.0-rc-3f1436cca1-20240516))(react@19.0.0-rc-3f1436cca1-20240516):
+  next@14.3.0-canary.70(babel-plugin-react-compiler@0.0.0-experimental-592953e-20240517)(react-dom@19.0.0-rc-3f1436cca1-20240516(react@19.0.0-rc-3f1436cca1-20240516))(react@19.0.0-rc-3f1436cca1-20240516):
     dependencies:
       '@next/env': 14.3.0-canary.70
       '@swc/helpers': 0.5.11
@@ -6183,7 +6151,6 @@ snapshots:
       '@next/swc-win32-arm64-msvc': 14.3.0-canary.70
       '@next/swc-win32-ia32-msvc': 14.3.0-canary.70
       '@next/swc-win32-x64-msvc': 14.3.0-canary.70
-      '@playwright/test': 1.59.1
       babel-plugin-react-compiler: 0.0.0-experimental-592953e-20240517
       sharp: 0.33.4
     transitivePeerDependencies:
@@ -6392,14 +6359,6 @@ snapshots:
       confbox: 0.2.4
       exsolve: 1.0.8
       pathe: 2.0.3
-
-  playwright-core@1.59.1: {}
-
-  playwright@1.59.1:
-    dependencies:
-      playwright-core: 1.59.1
-    optionalDependencies:
-      fsevents: 2.3.2
 
   pluralize@8.0.0: {}
 

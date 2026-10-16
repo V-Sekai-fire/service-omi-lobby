@@ -82,15 +82,7 @@ defmodule Uro.Accounts.User do
 
     ######
 
-    many_to_many(:friendships, Uro.UserRelations.Friendship,
-      join_through: "friendships",
-      join_keys: [user_id: :id, friend_id: :id]
-    )
-
     has_many(:hosted_zones, Uro.VSekai.Zone, foreign_key: :user_id)
-
-    has_many(:identity_proofs_from, Uro.UserRelations.IdentityProof, foreign_key: :user_from_id)
-    has_many(:identity_proofs_to, Uro.UserRelations.IdentityProof, foreign_key: :user_to_id)
 
     field(:locked_at, :utc_datetime)
 

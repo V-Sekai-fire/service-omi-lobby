@@ -141,12 +141,6 @@ defmodule Uro.Router do
 
     resources("/shards", Uro.ZoneController, only: [:index, :create, :update, :delete])
 
-    scope "/identity_proofs" do
-      pipe_through([:authenticated_user])
-      post("/", Uro.IdentityProofController, :create)
-      get("/:id", Uro.IdentityProofController, :show)
-    end
-
     post "/loop/commit", Uro.LoopController, :commit
 
     get "/lobby/servers", Uro.LobbyController, :servers
@@ -192,11 +186,6 @@ defmodule Uro.Router do
 
           put "/email", Uro.UserController, :update_email
           patch "/email", Uro.UserController, :resend_confirmation_email
-
-          resources("/friend", Uro.FriendController,
-            singleton: true,
-            only: [:show, :create, :delete]
-          )
         end
       end
     end

@@ -4,8 +4,7 @@ import Config
 require Logger
 
 # Real Phoenix runtime config: evaluated once, at boot, inside the
-# compiled OTP release Burrito wraps (mix.exs's releases: block) -- not
-# at `mix compile` time. This replaces config.exs's former COMPILE_PHASE
+# running app -- not at `mix compile` time. This replaces config.exs's former COMPILE_PHASE
 # trick (Uro.Config.Helpers.get_env/2), which existed only because this
 # app used to boot via `iex -S mix ...` instead of a real release: `mix`
 # re-evaluates config.exs on every invocation, so that trick let the

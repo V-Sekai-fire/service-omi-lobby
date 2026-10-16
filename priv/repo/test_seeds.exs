@@ -4,12 +4,9 @@
 #
 #     mix run priv/repo/test_seeds.exs
 #
-# Also called from the container ENTRYPOINT on every boot; all operations are
-# idempotent — existing rows are left untouched.
+# All operations are idempotent — existing rows are left untouched.
 #
 # Passwords are read from ADMIN_PASSWORD / USER_PASSWORD environment variables.
-# Run generate-secrets.sh in multiplayer-fabric-hosting/ to populate .env
-# before the first `docker compose up`.
 alias Uro.Accounts.User
 alias Uro.Accounts.UserPrivilegeRuleset
 alias Uro.Repo

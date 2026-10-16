@@ -5,7 +5,7 @@ defmodule Uro.ClientRoutesTest do
   What godot_uro's calls get back where the answer was wrong: a closed registration said
   500 and not 403, an unknown route said 500 and not 404, and the shard heartbeat crashed on
   a preload of an association the user has not. Measured through the endpoint, the way the
-  client reaches it; `scripts/godot_uro_calls.sh` is the same calls through the client.
+  client reaches it.
   """
   use Uro.RepoCase, async: false
 

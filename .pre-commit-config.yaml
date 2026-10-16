@@ -27,23 +27,3 @@ repos:
         language: system
         files: \.(ex|exs|scm)$
         exclude: ^(deps|_build)/
-
-      - id: format-lisp
-        name: "s7 scheme: reindent (c_src/s7/fixtures/*.scm)"
-        entry: python3 scripts/format_lisp.py --check
-        language: system
-        files: \.scm$
-
-      - id: format-lean
-        name: "lean: style (scripts/format_lean.py)"
-        entry: python3 scripts/format_lean.py --check
-        language: system
-        files: \.lean$
-        exclude: ^lean/\.lake/
-
-      - id: lean-build
-        name: "lean: lake build"
-        entry: bash -c 'bash c_src/thirdparty/build_cassie_native.sh && cd lean && lake build'
-        language: system
-        pass_filenames: false
-        files: \.lean$

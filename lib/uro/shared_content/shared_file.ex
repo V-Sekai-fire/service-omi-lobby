@@ -55,11 +55,4 @@ defmodule Uro.SharedContent.SharedFile do
   def upload_changeset(shared_file, attrs) do
     shared_content_upload_changeset(shared_file, attrs)
   end
-
-  @doc false
-  def bake_changeset(shared_file, attrs) do
-    shared_file
-    |> cast(attrs, [:baked_url])
-    |> validate_required([:baked_url])
-  end
 end

@@ -11,9 +11,6 @@ defmodule Uro.Release do
   directly, invoked through `bin/uro eval "Uro.Release.migrate()"`
   (or, self-contained, through this app's own boot flow before starting
   the endpoint).
-
-  Migrates through `Uro.Repo` itself, before the endpoint starts: a weft_fdb
-  database admits one connection, since every open takes its fence.
   """
 
   @app :uro

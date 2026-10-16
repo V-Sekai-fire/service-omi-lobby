@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2026 K. S. Ernest (iFire) Lee
-# Uro's sandbox on the private network: the WAN must be unreachable and fdbserver's files on disk
-# untouchable from here, so every write Uro makes goes through sqlite-fdb to 10.77.0.1. Its spans,
-# its log and the run's measurements land in the VictoriaMetrics suite at 10.77.0.3.
+# Uro's sandbox on the private network: the WAN must be unreachable, and Uro writes its database
+# only to its own directory. Its spans, its log and the run's measurements land in the
+# VictoriaMetrics suite at 10.77.0.3.
 set -euo pipefail
 work=$1
-cluster="$work/fdb/fdb.cluster"
+db="$work/uro/uro_offline.db"
 obs=http://10.77.0.3
 
 # Polls a suite query until its answer passes [ answer <op> <want> ]; prints the last answer either way.
@@ -35,17 +35,6 @@ if curl -sS --max-time 5 -o /dev/null https://github.com 2> /tmp/wan.txt; then
 fi
 echo "control: the WAN is unreachable ($(tr -d '\n' < /tmp/wan.txt))"
 
-if touch "$work/fdb/data/written-by-uro" 2> /dev/null; then
-  echo "FAIL: Uro's sandbox can write fdbserver's data directory on disk"
-  exit 1
-fi
-echo "control: fdbserver's files are read-only here; Uro writes only through sqlite-fdb"
-
-fdbcli -C "$cluster" --exec "configure new single ssd" --timeout 30
-until fdbcli -C "$cluster" --exec "status minimal" --timeout 5 | grep -q available; do
-  sleep 1
-done
-
 for port in 8428 9428 10428; do
   if [ "$(await = OK curl -sf "$obs:$port/health")" != OK ]; then
     echo "FAIL: the suite's store on $obs:$port never answered"
@@ -67,30 +56,29 @@ ELIXIR
 OTEL_SERVICE_NAME=uro-offline-control OTEL_EXPORTER_OTLP_ENDPOINT=$obs:1/insert/opentelemetry \
   mix run --no-start "$work/control.exs" > "$work/control.log" 2>&1
 
-export WEFT_FDB_CLUSTER_FILE="$cluster" TEST_DATABASE="file:uro_offline.v1?vfs=weft_fdb"
-URO_MIGRATION_POOL=1 mix ecto.migrate
+export TEST_DATABASE="$db"
+mix ecto.migrate
 mix run priv/repo/test_seeds.exs
 URO_SUITE_URL=$obs mix test --include suite 2>&1 | tee "$work/uro-test.log"
 
-keys=$(fdbcli -C "$cluster" --exec "getrangekeys weft/db/uro_offline.v1/ weft/db/uro_offline.v10 100" |
-  grep -c "weft/db/uro_offline.v1/" || true)
-echo "keys Uro wrote through sqlite-fdb into FoundationDB at 10.77.0.1: $keys"
-[ "$keys" -gt 0 ]
+bytes=$(stat -c %s "$db" 2> /dev/null || echo 0)
+echo "bytes Uro wrote to its SQLite file: $bytes"
+[ "$bytes" -gt 0 ]
 
 lines=$(grep -c . "$work/uro-test.log")
 ship uro-offline-test "$work/uro-test.log"
 ship uro-offline-control "$work/control.log"
-printf 'uro_offline_keys_written %s\nuro_offline_log_lines %s\n' "$keys" "$lines" |
+printf 'uro_offline_db_bytes %s\nuro_offline_log_lines %s\n' "$bytes" "$lines" |
   curl -sf -X POST -H 'Content-Type: text/plain' --data-binary @- "$obs:8428/api/v1/import/prometheus"
 spans=$(await -gt 0 hits 10428 '"resource_attr:service.name":="uro-offline" name:*')
 stored=$(await = "$lines" hits 9428 'stream:"uro-offline-test"')
 connects=$(hits 9428 'stream:"uro-offline-test" failed_connect')
-metric=$(await = "$keys" sample uro_offline_keys_written)
+metric=$(await = "$bytes" sample uro_offline_db_bytes)
 control_connects=$(await -gt 0 hits 9428 'stream:"uro-offline-control" failed_connect')
 control_spans=$(hits 10428 '"resource_attr:service.name":="uro-offline-control" name:*')
-echo "suite: $spans spans from Uro, $stored of $lines log lines, $connects failed connects, keys metric $metric"
+echo "suite: $spans spans from Uro, $stored of $lines log lines, $connects failed connects, bytes metric $metric"
 echo "control: $control_connects failed connects and $control_spans spans from an exporter with no collector"
-if ! { [ "$spans" -gt 0 ] && [ "$stored" = "$lines" ] && [ "$connects" = 0 ] && [ "$metric" = "$keys" ]; }; then
+if ! { [ "$spans" -gt 0 ] && [ "$stored" = "$lines" ] && [ "$connects" = 0 ] && [ "$metric" = "$bytes" ]; }; then
   echo "FAIL: the suite did not receive the run as sent"
   exit 1
 fi

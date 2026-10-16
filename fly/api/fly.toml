@@ -7,7 +7,13 @@ primary_region = "sjc"
   dockerfile = "Containerfile"
 
 [env]
-  URO_DATABASE = "file:vsekai-lobby-dev.v1?vfs=weft_fdb"
+  URO_DATABASE = "/data/vsekai-lobby.db"
+
+# One volume, so run one machine:
+#   fly volumes create vsekai_lobby_data --app vsekai-lobby-api --region sjc --size 1
+[mounts]
+  source = "vsekai_lobby_data"
+  destination = "/data"
 
 [[services]]
   internal_port = 4000

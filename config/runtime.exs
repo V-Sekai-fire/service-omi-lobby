@@ -39,8 +39,6 @@ if config_env() == :prod do
       |> URI.new!(),
     root_origin: root_origin
 
-  config :uro, :weftfdb_extension, System.fetch_env!("URO_WEFTFDB_EXTENSION")
-
   # The page a phone opens from the device sign-in QR; on a LAN deploy, the one public host.
   config :uro,
          :device_verification_uri,
@@ -51,13 +49,8 @@ if config_env() == :prod do
     origin: System.get_env("WEBAUTHN_ORIGIN", URI.to_string(root_origin)),
     rp_id: System.get_env("WEBAUTHN_RP_ID", root_origin.host)
 
-  # One connection: every open of a weft_fdb database takes its fence (datasource-store).
-  config :uro, Uro.Repo,
-    database: System.get_env("URO_DATABASE", "file:uro.v1?vfs=weft_fdb"),
-    pool_size: 1,
-    journal_mode: :memory,
-    locking_mode: :exclusive,
-    migration_lock: false
+  # A SQLite file; on Fly it sits on the app's volume.
+  config :uro, Uro.Repo, database: System.get_env("URO_DATABASE", "uro.db")
 
   https_port = String.to_integer(System.get_env("HTTPS_PORT") || "443")
   http_port = String.to_integer(System.get_env("PORT") || "4000")

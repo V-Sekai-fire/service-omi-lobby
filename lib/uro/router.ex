@@ -164,7 +164,6 @@ defmodule Uro.Router do
       end
 
       get "/:id", Uro.StorageController, :show
-      post "/:id/manifest", Uro.StorageController, :manifest
 
       pipe_through([:authenticated_shared_file])
 
@@ -172,7 +171,6 @@ defmodule Uro.Router do
       post "/", Uro.StorageController, :create
       put "/:id", Uro.StorageController, :update
       delete "/:id", Uro.StorageController, :delete
-      post "/:id/bake", Uro.StorageController, :bake
     end
 
     scope "/users" do
@@ -239,10 +237,5 @@ defmodule Uro.Router do
         delete "/:id", Uro.PropController, :delete
       end
     end
-  end
-
-  # Content-addressed chunk server — outside /api/v1, served directly by Caddy.
-  scope "/chunks" do
-    forward "/", AriaStorage.ChunkServerPlug, writeable: true
   end
 end

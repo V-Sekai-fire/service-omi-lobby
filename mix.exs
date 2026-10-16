@@ -133,6 +133,9 @@ defmodule Uro.MixProject do
       {:remote_ip, "~> 1.0"},
       {:waffle, "~> 1.1"},
       {:waffle_ecto, "~> 0.0.10"},
+      # Waffle.Storage.S3 (UPLOAD_STORAGE=s3) calls these; aria_storage used to bring them in.
+      {:ex_aws, "~> 2.6"},
+      {:ex_aws_s3, "~> 2.5"},
       {:ecto_commons, "~> 0.3.4"},
       {:swoosh, "~> 1.3"},
       {:hammer, "~> 6.0"},
@@ -141,7 +144,6 @@ defmodule Uro.MixProject do
       {:elixir_make, "~> 0.10", runtime: false},
       {:fine, "~> 0.1", runtime: false},
       {:burrito, "~> 1.0"},
-      {:aria_storage, github: "V-Sekai-fire/aria-storage"},
       {:uro_loop, path: "apps/uro_loop"},
       {:mox, "~> 1.1", only: :test},
 

@@ -55,4 +55,4 @@ None of these served the lobby; all are removed.
 - OpenTelemetry export (`opentelemetry*`, `Uro.Telemetry`): **Decide.** It goes with the offline check.
 - ~~`.github/workflows/build-image.yml`, root `Dockerfile`, `docker-compose.yml`, `Caddyfile`, Burrito release: the old zone backend's image and stack~~ **Unshipped.** The Fly deploy uses `fly/` instead.
 - `docs/decisions`: decision records from the zone backend. **Decide.**
-- `AGENTS.md`: describes the zone backend's deploy, not this one. **Decide.**
+- ~~`AGENTS.md` sections on the zone backend's deploy, asset cycles and PoC runbook~~ **Unshipped.** The rest is agent guidance for this repo.

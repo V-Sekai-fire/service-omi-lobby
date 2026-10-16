@@ -7,10 +7,6 @@ defmodule Uro.Endpoint do
     URI.to_string(Application.fetch_env!(:uro, :url)) <> pathname
   end
 
-  socket "/socket", Uro.UserSocket,
-    websocket: true,
-    longpoll: false
-
   if Mix.env() == :dev do
     plug(Phoenix.CodeReloader)
   end
@@ -19,16 +15,6 @@ defmodule Uro.Endpoint do
     at: "/uploads",
     from: Path.expand("./uploads"),
     gzip: false
-  )
-
-  # The Gyre (rfd/0085): a single self-contained HTML file, no build step
-  # and no framework runtime. 16,421 bytes, replacing a 919,261-byte
-  # three.js + SlugHorn WASM client. Served at /gyre/index.html.
-  plug(Plug.Static,
-    at: "/gyre",
-    from: {:uro, "priv/gyre"},
-    only: ["index.html"],
-    gzip: true
   )
 
   plug(Plug.RequestId, assign_as: :request_id)

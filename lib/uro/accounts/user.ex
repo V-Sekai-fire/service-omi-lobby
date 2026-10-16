@@ -68,22 +68,6 @@ defmodule Uro.Accounts.User do
 
     has_one(:user_privilege_ruleset, Uro.Accounts.UserPrivilegeRuleset, foreign_key: :user_id)
 
-    has_many(:uploaded_avatars, Uro.UserContent.Avatar, foreign_key: :uploader_id)
-    has_many(:uploaded_maps, Uro.UserContent.Map, foreign_key: :uploader_id)
-    has_many(:uploaded_props, Uro.UserContent.Prop, foreign_key: :uploader_id)
-
-    # Inventory
-
-    has_many :backpacks, Uro.Inventory.Backpack, foreign_key: :owner_id
-
-    has_many :avatars, through: [:backpacks, :avatars]
-    has_many :maps, through: [:backpacks, :maps]
-    has_many :props, through: [:backpacks, :props]
-
-    ######
-
-    has_many(:hosted_zones, Uro.VSekai.Zone, foreign_key: :user_id)
-
     field(:locked_at, :utc_datetime)
 
     pow_user_fields()

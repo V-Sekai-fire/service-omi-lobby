@@ -46,18 +46,6 @@ defmodule Uro.Router do
     plug(Uro.Plug.ChooseAuth)
   end
 
-  pipeline :dashboard_avatars do
-    plug(Uro.Plug.RequireAvatarUploadPermission)
-  end
-
-  pipeline :dashboard_maps do
-    plug(Uro.Plug.RequireMapUploadPermission)
-  end
-
-  pipeline :dashboard_props do
-    plug(Uro.Plug.RequirePropUploadPermission)
-  end
-
   if Mix.env() == :dev do
     pipeline :browser do
       plug(:accepts, ["html"])
@@ -136,13 +124,6 @@ defmodule Uro.Router do
       end
     end
 
-    resources("/avatars", Uro.AvatarController, only: [:index, :show])
-    resources("/maps", Uro.MapController, only: [:index, :show])
-
-    resources("/shards", Uro.ZoneController, only: [:index, :create, :update, :delete])
-
-    post "/loop/commit", Uro.LoopController, :commit
-
     get "/lobby/servers", Uro.LobbyController, :servers
 
     scope "/admin" do
@@ -195,36 +176,6 @@ defmodule Uro.Router do
 
       get("/", Uro.AuthenticationController, :get_current_session)
       delete("/", Uro.AuthenticationController, :logout)
-
-      scope "/avatars" do
-        pipe_through([:dashboard_avatars])
-
-        get "/", Uro.AvatarController, :index_uploads
-        get "/:id", Uro.AvatarController, :show_upload
-        post "/", Uro.AvatarController, :create
-        put "/:id", Uro.AvatarController, :update
-        delete "/:id", Uro.AvatarController, :delete
-      end
-
-      scope "/maps" do
-        pipe_through([:dashboard_maps])
-
-        get "/", Uro.MapController, :index_uploads
-        get "/:id", Uro.MapController, :show_upload
-        post "/", Uro.MapController, :create
-        put "/:id", Uro.MapController, :update
-        delete "/:id", Uro.MapController, :delete
-      end
-
-      scope "/props" do
-        pipe_through([:dashboard_props])
-
-        get "/", Uro.PropController, :index_uploads
-        get "/:id", Uro.PropController, :show_upload
-        post "/", Uro.PropController, :create
-        put "/:id", Uro.PropController, :update
-        delete "/:id", Uro.PropController, :delete
-      end
     end
   end
 end

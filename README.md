@@ -24,7 +24,7 @@ Run Uro with its development database in a local file:
 mix deps.get && mix ecto.setup && mix phx.server
 ```
 
-The build compiles a native sandbox library, so CMake and Ninja must be on the path. Run the site with `pnpm install && pnpm dev` in `frontend/`.
+Run the site with `pnpm install && pnpm dev` in `frontend/`.
 
 `fly/` holds the Fly.io deploy: `fly/api` for Uro, with no public address, and `fly/web` for the site.
 

@@ -61,11 +61,6 @@ result
 .elixir-tools
 priv/pow_cache.dets
 
-# Native build outputs (root Makefile: weft sandbox NIF)
-priv/weft_sandbox_nif.dll
-priv/weft_sandbox_nif.so
-c_src/guest/*.o
-/build/
 priv/plts/
 
 # SQLite databases written by dev and test runs

@@ -3,9 +3,8 @@
 defmodule Uro.ClientRoutesTest do
   @moduledoc """
   What godot_uro's calls get back where the answer was wrong: a closed registration said
-  500 and not 403, an unknown route said 500 and not 404, and the shard heartbeat crashed on
-  a preload of an association the user has not. Measured through the endpoint, the way the
-  client reaches it.
+  500 and not 403, and an unknown route said 500 and not 404. Measured through the endpoint,
+  the way the client reaches it.
   """
   use Uro.RepoCase, async: false
 
@@ -139,28 +138,6 @@ defmodule Uro.ClientRoutesTest do
   end
 
   test "control: a route that is there is not 404" do
-    assert get(build_conn(), "/api/v1/shards").status == 200
-  end
-
-  test "the shard heartbeat updates an anonymous shard from its own address" do
-    created =
-      build_conn()
-      |> form("/api/v1/shards", %{
-        "shard" => %{
-          "name" => "probe",
-          "map" => "probe_map",
-          "port" => "7777",
-          "max_users" => "8"
-        }
-      })
-
-    assert created.status == 200
-    %{"data" => %{"id" => id}} = Jason.decode!(created.resp_body)
-
-    beat = put(build_conn(), "/api/v1/shards/#{id}", %{"shard" => %{"current_users" => "1"}})
-    assert beat.status == 200
-
-    gone = delete(build_conn(), "/api/v1/shards/#{id}", %{"shard" => %{}})
-    assert gone.status == 200
+    assert get(build_conn(), "/api/v1/lobby/servers").status == 200
   end
 end

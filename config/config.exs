@@ -20,17 +20,8 @@ config :logger, :console,
 
 config :phoenix, :json_library, Jason
 
-config :uro, :stale_zone_cutoff,
-  amount: 3,
-  calendar_type: "month"
-
-config :uro, :stale_zone_interval, 30 * 24 * 60 * 60 * 1000
-
 # The OMI lobby lists these Basis servers (host:port of the game port) and probes them.
 config :uro, :lobby_basis_servers, ["server1.basisvr.org:4296"]
-
-config :uro, :rebac_adapter, Uro.ReBAC.ElixirAdapter
-config :uro, :planner_adapter, Uro.Planner.ElixirAdapter
 
 config :uro, :pow,
   user: Uro.Accounts.User,

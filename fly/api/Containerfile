@@ -1,19 +1,16 @@
 # Uro for Fly.
 FROM docker.io/library/elixir:1.17-otp-27
 RUN apt-get update && apt-get install -y --no-install-recommends \
-      cmake ninja-build build-essential git curl ca-certificates python3 \
+      build-essential git curl ca-certificates \
  && rm -rf /var/lib/apt/lists/*
 ENV MIX_ENV=prod
 WORKDIR /app
 RUN mix local.hex --force && mix local.rebar --force
 COPY mix.exs mix.lock ./
-COPY apps ./apps
 RUN mix do deps.get, patch.exmarcel, deps.compile
 COPY config ./config
 COPY priv ./priv
 COPY lib ./lib
-COPY Makefile ./
-COPY c_src ./c_src
 RUN mix compile
 # The web image copies this spec from here at build time.
 # runtime.exs demands deploy secrets under prod; these placeholders exist only for this step.

@@ -37,9 +37,6 @@ jobs:
           key: ${{ runner.os }}-zone-backend-mix-${{ hashFiles('mix.lock') }}
           restore-keys: ${{ runner.os }}-zone-backend-mix-
 
-      - name: Install CMake
-        run: sudo apt-get install -y -q cmake
-
       - name: Install dependencies
         run: mix deps.get
 

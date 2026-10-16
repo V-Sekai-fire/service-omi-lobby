@@ -20,7 +20,6 @@ defmodule Uro.Application do
         else: [
           Uro.Repo,
           Uro.Endpoint,
-          Uro.VSekai.ZoneJanitor,
           lobby_poller(),
           Uro.Pow.DetsCache,
           {Phoenix.PubSub, [name: Uro.PubSub, adapter: Phoenix.PubSub.PG2]},

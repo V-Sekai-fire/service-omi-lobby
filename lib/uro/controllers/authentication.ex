@@ -33,9 +33,6 @@ defmodule Uro.AuthenticationController do
   | `:authenticated_admin` | `RequireAuthenticated` + `RequireAdmin` | `/admin` |
   | `:authenticated_user` | `ChooseAuth` | Dashboard, `/profile`, `/session` reads |
   | `:authenticated_shared_file` | `RequireSharedFileUploadPermission` | Storage writes + bake |
-  | `:dashboard_avatars` | `RequireAvatarUploadPermission` | Avatar uploads |
-  | `:dashboard_maps` | `RequireMapUploadPermission` | Map uploads |
-  | `:dashboard_props` | `RequirePropUploadPermission` | Prop uploads |
 
   ## OAuth2 (PowAssent)
 

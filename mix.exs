@@ -9,12 +9,11 @@ defmodule Uro.MixProject do
       version: "0.1.0",
       elixir: ">= 1.16.3",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:elixir_make] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
       dialyzer: dialyzer()
-    ] ++ make_options()
+    ]
   end
 
   # `mix dialyzer` (dialyxir). PLTs are cached under `priv/plts` (not
@@ -27,26 +26,6 @@ defmodule Uro.MixProject do
       plt_add_apps: [:mix, :ex_unit],
       ignore_warnings: ".dialyzer_ignore.exs"
     ]
-  end
-
-  # weft_warp_burrito's sandbox NIF (lib/weft_warp_burrito/*,
-  # c_src/{guest,nif,thirdparty}) was extracted directly into this app -- a
-  # single root Makefile builds it. mingw32-make on Windows (matches
-  # weft_warp_burrito's own former mix.exs -- its CMake+Ninja+RISC-V recipe
-  # was only ever GNU Make syntax, no MSVC/nmake port exists for it). The
-  # taskweft_nif.cpp/standalone/ native planner+ReBAC NIF this Makefile used
-  # to also build was retired in RFD 0038, once the compiled-Scheme sandbox
-  # adapters (RFD 0022/0023) became the only ReBAC/planner adapters; those
-  # were themselves retired in favor of plain-Elixir ports (RFD 0039), which
-  # is why c_src/s7 (the in-repo s7 AOT compiler this comment used to
-  # mention) no longer exists either.
-  defp make_options do
-    base = [make_env: fn -> %{"FINE_INCLUDE_DIR" => Fine.include_dir()} end]
-
-    case :os.type() do
-      {:win32, _} -> base ++ [make_executable: "mingw32-make"]
-      _ -> base
-    end
   end
 
   # Configuration for the OTP application.
@@ -120,10 +99,6 @@ defmodule Uro.MixProject do
       {:hammer, "~> 6.0"},
       {:scrivener_ecto, "~> 3.1"},
       {:ex_marcel, "~> 0.1.0"},
-      {:elixir_make, "~> 0.10", runtime: false},
-      {:fine, "~> 0.1", runtime: false},
-      {:uro_loop, path: "apps/uro_loop"},
-      {:mox, "~> 1.1", only: :test},
 
       # OpenTelemetry — ships spans + logs to multiplayer-fabric-observability
       {:opentelemetry, "~> 1.6"},

@@ -7,8 +7,6 @@
   # after the warning stops firing.
   {"lib/uro/accounts.ex", :call_without_opaque},
   {"lib/uro/controllers/fallback.ex", :invalid_contract},
-  {"lib/uro/controllers/identity_proof_controller.ex", :invalid_contract},
-  {"lib/uro/controllers/identity_proof_controller.ex", :unknown_type},
   {"lib/uro/controllers/loop.ex", :invalid_contract},
   {"lib/uro/helpers/validation.ex", :no_return},
   {"lib/uro/helpers/validation.ex", :call},

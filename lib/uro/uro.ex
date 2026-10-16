@@ -54,12 +54,6 @@ defmodule Uro do
   is public; `modify` requires `owner`. Policies are stored in CockroachDB and
   evaluated by the zone server C++ module.
 
-  ### Headless asset baking
-
-  Zone servers use an `editor=no` Godot build. Asset validation and casync
-  chunking run in a separate one-shot baker container (`editor=yes`). See
-  `Uro.StorageController` for the full pipeline.
-
   ### Wire-compat: /shards path
 
   The HTTP endpoints are named `/shards` (not `/zones`) to maintain

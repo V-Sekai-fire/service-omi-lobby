@@ -20,8 +20,8 @@ Status words:
 ## Storage
 
 - sqlite-vfs-fdb: the `weft_fdb` SQLite VFS from datasource-store, which kept database pages in FoundationDB (`Uro.Repo.WeftFdb`, `URO_WEFTFDB_EXTENSION`, the FoundationDB steps in CI, the offline check and the Fly image). **Unshipped.** The database is now a SQLite file; on Fly it is on a volume.
-- `aria_storage` chunk server (`/chunks`), `/api/v1/storage/*` and asset baking: casync chunk storage for uploaded assets. **Candidate.**
-- `.github/workflows/casync-interop.yml`: checks `aria_storage` against desync. Goes with `aria_storage`. **Candidate.**
+- `aria_storage` and desync: the `/chunks` chunk server, the bake and manifest endpoints, and `.github/workflows/casync-interop.yml`, which checked `aria_storage` against desync. **Unshipped.**
+- Shared files (`/api/v1/storage/*` list, show, upload, update, delete): the front-end `/download` page lists them by tag. **Decide**, with `/download`.
 - Uploads (`waffle`, `/uploads`, `UPLOAD_STORAGE`): avatar, map and prop files. **Candidate.**
 
 ## Accounts and sign-in

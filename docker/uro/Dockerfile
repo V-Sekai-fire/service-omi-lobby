@@ -40,8 +40,7 @@ RUN curl -fsSL -o /tmp/zig.tar.xz \
 ENV PATH="/opt/zig:${PATH}"
 
 # xpack riscv-none-elf-gcc: needed by the c_src NIF build
-# (WeftWarpBurrito.SandboxNif's guest target), same toolchain
-# .github/workflows/casync-interop.yml already installs for CI.
+# (WeftWarpBurrito.SandboxNif's guest target).
 RUN curl -fsSL -o /tmp/riscv-gcc.tar.gz \
 		https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v15.2.0-1/xpack-riscv-none-elf-gcc-15.2.0-1-linux-x64.tar.gz \
 	&& mkdir -p /opt/riscv-none-elf-gcc \

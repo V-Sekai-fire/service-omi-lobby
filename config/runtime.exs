@@ -169,9 +169,4 @@ if config_env() == :prod do
   config :opentelemetry_exporter,
     otlp_protocol: :http_protobuf,
     otlp_endpoint: otel_endpoint
-
-  config :aria_storage, :waffle_bucket, System.get_env("CHUNK_BUCKET", "zone-chunks")
-
-  config :aria_storage, AriaStorage.Repo,
-    database: System.get_env("ARIA_STORAGE_DB", "/app/priv/aria_storage.db")
 end

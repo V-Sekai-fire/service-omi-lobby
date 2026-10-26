@@ -4,10 +4,10 @@ defmodule Uro.PasskeysTest do
   import Phoenix.ConnTest
   import Plug.Conn
 
-  alias Uro.Accounts
-  alias Uro.Passkeys
+  alias Uro.Interactor.Accounts
+  alias Uro.Interactor.Passkeys
 
-  @endpoint Uro.Endpoint
+  @endpoint Uro.Transport.Web.Endpoint
 
   # A software authenticator: one P-256 key, "none" attestation, flags and count as asked.
   defmodule Authenticator do

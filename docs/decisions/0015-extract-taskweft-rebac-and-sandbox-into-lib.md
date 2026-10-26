@@ -46,7 +46,7 @@ implementation now lives directly in this repo, editable in place, with no
 unused CLI/MCP/OAuth/glTF-spec bulk along for the ride.
 
 Bad: `taskweft_rebac`'s moved file exposes a richer API than
-`Uro.Ports.ReBAC` declares (`check/5`, `expand/4`, `parse_relation_edges/2`,
+`Uro.Contract.ReBAC` declares (`check/5`, `expand/4`, `parse_relation_edges/2`,
 none currently called) — dead code from this repo's point of view, kept
 verbatim rather than trimmed to avoid touching logic during a pure move.
 

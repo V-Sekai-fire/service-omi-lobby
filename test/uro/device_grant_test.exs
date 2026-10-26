@@ -4,10 +4,10 @@ defmodule Uro.DeviceGrantTest do
   import Phoenix.ConnTest
   import Plug.Conn
 
-  alias Uro.Accounts
-  alias Uro.DeviceGrant
+  alias Uro.Interactor.Accounts
+  alias Uro.Interactor.DeviceGrant
 
-  @endpoint Uro.Endpoint
+  @endpoint Uro.Transport.Web.Endpoint
   @t0 ~U[2030-01-01 00:00:00Z]
 
   setup do

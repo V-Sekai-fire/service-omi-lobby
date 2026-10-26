@@ -10,7 +10,7 @@ defmodule Uro.ClientRoutesTest do
 
   import Phoenix.ConnTest
 
-  @endpoint Uro.Endpoint
+  @endpoint Uro.Transport.Web.Endpoint
 
   defp form(conn, path, params), do: post(conn, path, params)
 
@@ -43,7 +43,7 @@ defmodule Uro.ClientRoutesTest do
 
     # No mail server is attached in this environment, so the account is created unconfirmed
     # and no email is attempted.
-    refute Uro.Mailer.attached?()
+    refute Uro.Service.Mailer.attached?()
     Application.put_env(:uro, :registration_open, true)
     System.put_env("SIGNUP_API_KEY", "probe-key")
     n = System.unique_integer([:positive])
@@ -89,17 +89,17 @@ defmodule Uro.ClientRoutesTest do
 
   defp make_user(name, admin?) do
     {:ok, user} =
-      Uro.Accounts.create(%{
+      Uro.Interactor.Accounts.create(%{
         "email" => "#{name}@example.test",
         "username" => name,
         "display_name" => name,
         "password" => "probe-password-1"
       })
 
-    user = Uro.Accounts.get_user!(user.id)
+    user = Uro.Interactor.Accounts.get_user!(user.id)
 
     user.user_privilege_ruleset
-    |> Uro.Accounts.UserPrivilegeRuleset.admin_changeset(%{is_admin: admin?})
+    |> Uro.Entities.Accounts.UserPrivilegeRuleset.admin_changeset(%{is_admin: admin?})
     |> Repo.update!()
 
     user
@@ -117,7 +117,7 @@ defmodule Uro.ClientRoutesTest do
       |> post("/api/v1/admin/users/#{user.id}/confirm")
 
     assert refused.status == 403
-    assert is_nil(Uro.Accounts.get_user!(user.id).email_confirmed_at)
+    assert is_nil(Uro.Interactor.Accounts.get_user!(user.id).email_confirmed_at)
 
     confirmed =
       build_conn()
@@ -125,7 +125,7 @@ defmodule Uro.ClientRoutesTest do
       |> post("/api/v1/admin/users/#{user.id}/confirm")
 
     assert confirmed.status == 200
-    refute is_nil(Uro.Accounts.get_user!(user.id).email_confirmed_at)
+    refute is_nil(Uro.Interactor.Accounts.get_user!(user.id).email_confirmed_at)
   end
 
   test "an unknown route is 404 json, not 500" do

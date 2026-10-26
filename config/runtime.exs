@@ -18,7 +18,7 @@ require Logger
 # release genuinely does re-evaluate every time it starts.
 #
 # Only :prod is gated below; dev.exs/test.exs already define their own
-# complete, static Uro.Repo config and never build a release.
+# complete, static Uro.Repository.Repo config and never build a release.
 if config_env() == :prod do
   url =
     "URL"
@@ -49,7 +49,7 @@ if config_env() == :prod do
     rp_id: System.get_env("WEBAUTHN_RP_ID", root_origin.host)
 
   # A SQLite file; on Fly it sits on the app's volume.
-  config :uro, Uro.Repo, database: System.get_env("URO_DATABASE", "uro.db")
+  config :uro, Uro.Repository.Repo, database: System.get_env("URO_DATABASE", "uro.db")
 
   https_port = String.to_integer(System.get_env("HTTPS_PORT") || "443")
   http_port = String.to_integer(System.get_env("PORT") || "4000")
@@ -64,7 +64,7 @@ if config_env() == :prod do
     end
 
   config :uro,
-         Uro.Endpoint,
+         Uro.Transport.Web.Endpoint,
          [
            {:adapter, Bandit.PhoenixAdapter},
            {:url, Map.take(url, [:scheme, :host, :path])},
@@ -79,7 +79,7 @@ if config_env() == :prod do
 
   config :joken, default_signer: System.fetch_env!("JOKEN_SIGNER")
 
-  config :uro, Uro.Turnstile,
+  config :uro, Uro.Service.Turnstile,
     secret_key:
       System.get_env("TURNSTILE_SECRET_KEY") ||
         Logger.warning(
@@ -117,11 +117,11 @@ if config_env() == :prod do
         end
       end)
 
-  config :uro, Uro.Mailer,
+  config :uro, Uro.Service.Mailer,
     adapter: Swoosh.Adapters.Sendgrid,
     api_key: System.get_env("SENDGRID_API_KEY", "")
 
-  # The sender. Unset means no mail server is attached, and `Uro.Mailer.attached?/0` says so.
+  # The sender. Unset means no mail server is attached, and `Uro.Service.Mailer.attached?/0` says so.
   config :uro, :mail_from, System.get_env("MAIL_FROM")
 
   config :ex_aws,

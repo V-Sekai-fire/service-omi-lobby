@@ -114,7 +114,7 @@ defmodule Uro.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       "uro.apigen": [
-        "openapi.spec.json --spec Uro.OpenAPI.Specification --pretty --vendor-extensions=false ./frontend/src/__generated/openapi.json"
+        "openapi.spec.json --spec Uro.Contract.OpenAPI.Specification --pretty --vendor-extensions=false ./frontend/src/__generated/openapi.json"
       ],
 
       # Not required, fixes warning https://github.com/chaskiq/ex-marcel/pull/2

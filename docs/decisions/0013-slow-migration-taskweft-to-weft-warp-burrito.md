@@ -98,8 +98,8 @@ in `:dev` on this or any Linux machine — that stays genuinely unbuildable
 without the RISC-V/mingw32 toolchain, which is expected for a dev-only
 evaluation dependency.
 
-Also: strangler-fig scaffolding is now in place — `Uro.Ports.ReBAC`/
-`Uro.Ports.Planner` behaviours, `Uro.ReBAC`/`Uro.Planner` facades
+Also: strangler-fig scaffolding is now in place — `Uro.Contract.ReBAC`/
+`Uro.Contract.Planner` behaviours, `Uro.ReBAC`/`Uro.Planner` facades
 resolved via `Application.get_env(:uro, :rebac_adapter/:planner_adapter, ...)`,
 and `Uro.ReBAC.TaskweftAdapter`/`Uro.Planner.TaskweftAdapter` as the sole,
 config-default real implementation. All three call sites

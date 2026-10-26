@@ -18,15 +18,15 @@ defmodule Uro.Application do
       if System.get_env("MINIMAL_START") == "true",
         do: [],
         else: [
-          Uro.Repo,
-          Uro.Endpoint,
+          Uro.Repository.Repo,
+          Uro.Transport.Web.Endpoint,
           lobby_poller(),
-          Uro.Pow.DetsCache,
+          Uro.Service.Pow.DetsCache,
           {Phoenix.PubSub, [name: Uro.PubSub, adapter: Phoenix.PubSub.PG2]},
           ExMarcel.TableWrapper,
 
           # ExMarcel
-          {Task, fn -> Uro.Helpers.Validation.init_extra_extensions() end}
+          {Task, fn -> Uro.Entities.Support.Validation.init_extra_extensions() end}
         ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
@@ -36,13 +36,13 @@ defmodule Uro.Application do
   end
 
   defp lobby_poller do
-    if Application.get_env(:uro, :lobby_poller, true), do: Uro.Lobby.Poller
+    if Application.get_env(:uro, :lobby_poller, true), do: Uro.Transport.Poller
   end
 
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
-    Uro.Endpoint.config_change(changed, removed)
+    Uro.Transport.Web.Endpoint.config_change(changed, removed)
     :ok
   end
 end

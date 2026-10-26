@@ -15,11 +15,11 @@ trampoline ([[0021-guestvalue-handle-syscalls]]) can run real business
 logic, not just synthetic test programs. `Uro.ReBAC`
 ([[0015-extract-taskweft-rebac-and-sandbox-into-lib]]'s strangler-fig
 facade) is the natural target: it already resolves through
-`Uro.Ports.ReBAC`, a 3-callback behaviour (`new_graph/0`, `add_edge/4`,
+`Uro.Contract.ReBAC`, a 3-callback behaviour (`new_graph/0`, `add_edge/4`,
 `check_rel/4`), with `Uro.ReBAC.TaskweftAdapter` (wrapping the native
 `tw_rebac.hpp` NIF) as the sole real implementation.
 
-`Uro.Ports.ReBAC.check_rel/4` only ever needs `check_base` semantics
+`Uro.Contract.ReBAC.check_rel/4` only ever needs `check_base` semantics
 (direct edge, transitive `IS_MEMBER_OF`, `CONTROLS`-via-`DELEGATED_TO`
 inversion) — `Taskweft.ReBAC.check_rel` always builds a
 `{"type":"base",...}` expression, never `union`/`intersection`/
@@ -40,7 +40,7 @@ algorithm itself must recognize (`IS_MEMBER_OF`, `CONTROLS`,
 list rather than embedded in the program — `Uro.ReBAC.SandboxAdapter`
 owns that fixed vocabulary, not the guest.
 
-`Uro.ReBAC.SandboxAdapter` implements `Uro.Ports.ReBAC`: `new_graph`/
+`Uro.ReBAC.SandboxAdapter` implements `Uro.Contract.ReBAC`: `new_graph`/
 `add_edge` are pure Elixir (no guest call — building the edge list
 costs nothing); `check_rel` calls the named
 `Uro.ReBAC.SandboxAdapter.Program` (one `WeftWarpBurrito.Program`

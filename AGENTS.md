@@ -28,6 +28,10 @@ mix format --check-formatted       # formatting
 
 The TDD arc must be legible in `git log`.
 
+## Layout
+
+Hexagonal: `lib/uro/{transport,contract,interactor,entities,repository,datasource,service}`. See `docs/architecture.md`. Put new code in the layer it belongs to.
+
 ## Elixir conventions
 
 - Functions return `{:ok, value}` / `{:error, reason}` at every boundary.

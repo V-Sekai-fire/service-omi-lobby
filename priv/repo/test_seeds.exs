@@ -7,9 +7,9 @@
 # All operations are idempotent — existing rows are left untouched.
 #
 # Passwords are read from ADMIN_PASSWORD / USER_PASSWORD environment variables.
-alias Uro.Accounts.User
-alias Uro.Accounts.UserPrivilegeRuleset
-alias Uro.Repo
+alias Uro.Entities.Accounts.User
+alias Uro.Entities.Accounts.UserPrivilegeRuleset
+alias Uro.Repository.Repo
 
 current_time = DateTime.utc_now()
 

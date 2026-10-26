@@ -1,5 +1,7 @@
 # service-omi-lobby
 
+![OMI Lobby logo: a stack of three servers inside a dashed purple ring; filled green lights and a thick ring mean players are online, hollow lights and a thin ring mean nobody is](docs/omi-lobby-logo.png)
+
 **Find a metaverse server you can join right now.**
 
 Which space is open, and where do you go to join it?

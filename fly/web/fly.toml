@@ -1,4 +1,4 @@
-# V-Sekai lobby web (Next.js). Public; calls the API server-side over Flycast.
+# OMI Lobby web (Next.js). Public; calls the API server-side over Flycast.
 #   fly deploy --config fly/web/fly.toml --build-arg uro_image=registry.fly.io/vsekai-lobby-api:<tag>
 app = "vsekai-lobby"
 primary_region = "sjc"

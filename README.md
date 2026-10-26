@@ -95,7 +95,7 @@ Run both, then open the site.
 - [benbot](https://github.com/benbot)
 - [dragonhunt02](https://github.com/dragonhunt02)
 
-Dependabot also committed upstream. Work in this repository: [fire](https://github.com/fire). The lobby page lists the same people; `Uro.Contributors` in `mix docs` says how to update both.
+Dependabot also committed upstream. Work in this repository: [fire](https://github.com/fire). The lobby is an experiment of the [Open Metaverse Interoperability Group](https://omigroup.org/). The lobby page lists the same people; `Uro.Contributors` in `mix docs` says how to update both.
 
 ## Licence
 

@@ -124,7 +124,7 @@ export default async function LobbyPage() {
 				<p>
 					Uro began as a copy of{" "}
 					<InlineLink href="https://github.com/V-Sekai/uro">V-Sekai/uro</InlineLink>
-					, without its git history. These people wrote it before the copy:
+					. These people wrote it before the copy:
 				</p>
 				<ul className="flex flex-wrap gap-x-4 gap-y-1">
 					{contributors.map((name) => (
@@ -133,6 +133,13 @@ export default async function LobbyPage() {
 						</li>
 					))}
 				</ul>
+				<p>
+					The lobby is an experiment of the{" "}
+					<InlineLink href="https://omigroup.org/">
+						Open Metaverse Interoperability Group
+					</InlineLink>
+					.
+				</p>
 			</Section>
 			<Footer />
 		</main>

@@ -84,7 +84,7 @@ Run both, then open the site.
 
 ## Contributors
 
-**Uro began as a copy of V-Sekai/uro, without its git history.**
+**Uro began as a copy of V-Sekai/uro.**
 
 `git log` here shows only later work. These people wrote Uro and its web front end before the copy ([V-Sekai/uro](https://github.com/V-Sekai/uro)):
 

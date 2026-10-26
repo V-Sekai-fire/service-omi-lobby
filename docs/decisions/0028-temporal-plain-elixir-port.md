@@ -37,7 +37,7 @@ vendored Howard Hinnant `date.h`.
 
 Good: no floats, no external date library, same trust-appropriate
 "plain Elixir, not sandboxed" pattern as `Uro.LoopCore`. Bad: not yet
-wired to a real caller (no `Uro.Ports.Planner`-style adapter exists for
+wired to a real caller (no `Uro.Contract.Planner`-style adapter exists for
 temporal checking today) — this lands as a tested, ready-to-use module,
 not yet an integrated feature; wiring it up is separate follow-on work.
 

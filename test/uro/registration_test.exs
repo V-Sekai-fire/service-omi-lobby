@@ -1,9 +1,9 @@
 defmodule Uro.RegistrationTest do
   use Uro.RepoCase, async: false
 
-  alias Uro.Accounts.User
-  alias Uro.Registration
-  alias Uro.UserIdentities
+  alias Uro.Entities.Accounts.User
+  alias Uro.Entities.Registration
+  alias Uro.Interactor.UserIdentities
 
   @identity %{
     "provider" => "github",

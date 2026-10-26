@@ -1,7 +1,7 @@
 defmodule Uro.TOTPTest do
   use ExUnit.Case, async: true
 
-  alias Uro.Accounts.TOTP
+  alias Uro.Entities.Accounts.TOTP
 
   @secret "12345678901234567890"
 

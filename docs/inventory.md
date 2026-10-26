@@ -10,11 +10,11 @@ Status words:
 
 ## Lobby
 
-- `Uro.Lobby`, `Uro.Lobby.Poller`, `Uro.Lobby.BasisQuery`, `Uro.Lobby.OverteDirectory`, `Uro.Lobby.Server`: poll Basis servers and Overte domains every 10 minutes and hold the list in memory. **Lobby.**
-- `GET /api/v1/lobby/servers` (`Uro.LobbyController`), `/health`, `/api/v1/openapi`: the page reads the list here, and the front end builds its API client from the OpenAPI spec. **Lobby.**
+- `Uro.Interactor.Lobby`, `Uro.Transport.Poller`, `Uro.Datasource.Basis.Query`, `Uro.Datasource.Overte.Directory`, `Uro.Entities.Lobby.Server`: poll Basis servers and Overte domains every 10 minutes and hold the list in memory. **Lobby.**
+- `GET /api/v1/lobby/servers` (`Uro.Transport.Web.Controllers.Lobby`), `/health`, `/api/v1/openapi`: the page reads the list here, and the front end builds its API client from the OpenAPI spec. **Lobby.**
 - `frontend/` page `/` (`(static)/page.tsx`, `refresh-ring`, `section`, `footer`): the lobby page. **Lobby.**
 - `fly/api`, `fly/web`: the Fly deploy of the API and the site. **Lobby.**
-- `Uro.Repo` (SQLite) and `priv/repo/migrations`: the API starts the repo and runs migrations at boot. The lobby list itself writes nothing to it. **Lobby** while the account features below stay.
+- `Uro.Repository.Repo` (SQLite) and `priv/repo/migrations`: the API starts the repo and runs migrations at boot. The lobby list itself writes nothing to it. **Lobby** while the account features below stay.
 
 ## Storage
 
@@ -27,11 +27,11 @@ Status words:
 
 Registration is closed on the public deploy, and the lobby page needs no account.
 
-- Users, sessions, login, e-mail confirmation (`Uro.Accounts`, `pow`, `pow_assent`, `Uro.Mailer`): **Decide.** Server submission and moderation, which are parked, would need an admin sign-in.
-- Second factor, passkeys, device grant (`Uro.SecondFactor`, `Uro.Passkeys`, `Uro.DeviceGrant`): **Decide**, with accounts.
+- Users, sessions, login, e-mail confirmation (`Uro.Interactor.Accounts`, `pow`, `pow_assent`, `Uro.Service.Mailer`): **Decide.** Server submission and moderation, which are parked, would need an admin sign-in.
+- Second factor, passkeys, device grant (`Uro.Interactor.SecondFactor`, `Uro.Interactor.Passkeys`, `Uro.Interactor.DeviceGrant`): **Decide**, with accounts.
 - Admin (`/api/v1/admin`, front-end `/admin`): **Decide**, with accounts.
-- Cloudflare Turnstile (`Uro.Turnstile`): **Decide**, with accounts.
-- ~~Friends, identity proofs (`Uro.UserRelations`)~~ **Unshipped.** `Uro.UserIdentities` (OAuth sign-in) stays with accounts.
+- Cloudflare Turnstile (`Uro.Service.Turnstile`): **Decide**, with accounts.
+- ~~Friends, identity proofs (`Uro.UserRelations`)~~ **Unshipped.** `Uro.Interactor.UserIdentities` (OAuth sign-in) stays with accounts.
 - Front-end pages `/login`, `/sign-up`, `/confirm-email`, `/user/[userId]`, `/download`, `/about`, `/v-sekai`: **Decide**, with accounts. `/download` and `/v-sekai` are V-Sekai pages, not lobby pages.
 
 ## V-Sekai game services

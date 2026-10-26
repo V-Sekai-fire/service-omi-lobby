@@ -9,7 +9,7 @@ import Config
 # release, evaluated once, at build time -- unlike runtime.exs, which
 # the release re-evaluates every time it actually starts).
 config :uro,
-  ecto_repos: [Uro.Repo]
+  ecto_repos: [Uro.Repository.Repo]
 
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
@@ -21,16 +21,16 @@ config :phoenix, :json_library, Jason
 config :uro, :lobby_basis_servers, ["server1.basisvr.org:4296"]
 
 config :uro, :pow,
-  user: Uro.Accounts.User,
-  users_context: Uro.Accounts,
-  repo: Uro.Repo,
+  user: Uro.Entities.Accounts.User,
+  users_context: Uro.Interactor.Accounts,
+  repo: Uro.Repository.Repo,
   web_module: Uro,
   extensions: [PowPersistentSession],
   controller_callbacks: Pow.Extension.Phoenix.ControllerCallbacks,
   routes_backend: Uro.Pow.Routes,
-  cache_store_backend: Uro.Pow.DetsCache
+  cache_store_backend: Uro.Service.Pow.DetsCache
 
-config :uro, :pow_assent, user_identities_context: Uro.UserIdentities
+config :uro, :pow_assent, user_identities_context: Uro.Interactor.UserIdentities
 
 config :uro, :registration_open, false
 

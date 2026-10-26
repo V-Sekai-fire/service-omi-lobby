@@ -1,0 +1,37 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 K. S. Ernest (iFire) Lee
+defmodule Uro.Transport.Web.Plugs.ChooseAuth do
+  import Plug.Conn
+
+  def init(default), do: default
+
+  def call(conn, opts) do
+    if has_authorization_header?(conn) do
+      # Game client
+      token = get_req_header(conn, "authorization")
+
+      case token do
+        [] ->
+          conn
+
+        [_auth_header] ->
+          assign(conn, :signed_access_token, token)
+      end
+
+      Uro.Transport.Web.Plugs.RequireUser.call(
+        conn,
+        Uro.Transport.Web.Plugs.RequireUser.init(opts)
+      )
+    else
+      opts = Keyword.merge(opts, error_handler: Uro.Transport.Web.Controllers.Fallback)
+      Pow.Plug.RequireAuthenticated.call(conn, Pow.Plug.RequireAuthenticated.init(opts))
+    end
+  end
+
+  defp has_authorization_header?(conn) do
+    case get_req_header(conn, "authorization") do
+      [] -> false
+      [_ | _] -> true
+    end
+  end
+end

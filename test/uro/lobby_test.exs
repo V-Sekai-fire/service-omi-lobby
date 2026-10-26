@@ -10,11 +10,11 @@ defmodule Uro.LobbyTest do
 
   import Phoenix.ConnTest
 
-  alias Uro.Lobby
-  alias Uro.Lobby.BasisQuery
-  alias Uro.Lobby.OverteDirectory
+  alias Uro.Interactor.Lobby
+  alias Uro.Datasource.Basis.Query
+  alias Uro.Datasource.Overte.Directory
 
-  @endpoint Uro.Endpoint
+  @endpoint Uro.Transport.Web.Endpoint
 
   # A real reply from server1.basisvr.org:4296 to nonce 0xBEEF (captured 2026-10-10).
   @basis_reply Base.decode16!(
@@ -23,7 +23,7 @@ defmodule Uro.LobbyTest do
 
   describe "Basis info query" do
     test "the query is one LiteNetLib unconnected message padded to the server's minimum" do
-      packet = BasisQuery.encode_query(0xBEEF)
+      packet = Query.encode_query(0xBEEF)
       assert byte_size(packet) == 1 + 384
       assert <<8, 0xBA515101::little-32, 1::little-16, 0xBEEF::little-16, pad::binary>> = packet
       assert pad == :binary.copy(<<0>>, 384 - 8)
@@ -36,17 +36,17 @@ defmodule Uro.LobbyTest do
                 motd: "another bright day",
                 online: 1,
                 capacity: 5000
-              }} = BasisQuery.decode_reply(@basis_reply, 0xBEEF)
+              }} = Query.decode_reply(@basis_reply, 0xBEEF)
     end
 
     test "control: a reply to another nonce, a wrong magic or a truncated reply is refused" do
-      assert {:error, :nonce_mismatch} = BasisQuery.decode_reply(@basis_reply, 0x0001)
+      assert {:error, :nonce_mismatch} = Query.decode_reply(@basis_reply, 0x0001)
 
       <<head, _magic::binary-size(4), rest::binary>> = @basis_reply
-      assert {:error, :bad_reply} = BasisQuery.decode_reply(<<head, 0::32, rest::binary>>, 0xBEEF)
+      assert {:error, :bad_reply} = Query.decode_reply(<<head, 0::32, rest::binary>>, 0xBEEF)
 
       assert {:error, :bad_reply} =
-               BasisQuery.decode_reply(binary_part(@basis_reply, 0, 20), 0xBEEF)
+               Query.decode_reply(binary_part(@basis_reply, 0, 20), 0xBEEF)
     end
 
     test "a probe reads a server that answers, and times out on one that does not" do
@@ -69,11 +69,11 @@ defmodule Uro.LobbyTest do
       end)
 
       assert {:ok, %{name: "main basis server", online: 1}} =
-               BasisQuery.probe("127.0.0.1", port, 2_000)
+               Query.probe("127.0.0.1", port, 2_000)
 
       {:ok, silent} = :gen_udp.open(0, [:binary, active: false, ip: {127, 0, 0, 1}])
       {:ok, silent_port} = :inet.port(silent)
-      assert {:error, :timeout} = BasisQuery.probe("127.0.0.1", silent_port, 300)
+      assert {:error, :timeout} = Query.probe("127.0.0.1", silent_port, 300)
     end
   end
 
@@ -143,12 +143,12 @@ defmodule Uro.LobbyTest do
                  capacity: 12,
                  motd: "A town"
                }
-             ] = OverteDirectory.parse_places(@places)
+             ] = Directory.parse_places(@places)
     end
 
     test "control: an error body lists nothing" do
       assert [] =
-               OverteDirectory.parse_places(%{"status" => "failure", "error" => "Not logged in"})
+               Directory.parse_places(%{"status" => "failure", "error" => "Not logged in"})
     end
   end
 
@@ -165,7 +165,7 @@ defmodule Uro.LobbyTest do
     test "a poll records a Basis reply and the Overte directory's active domains" do
       probes = %{
         basis: fn "server1.basisvr.org", 4296 -> {:ok, @answer} end,
-        overte: fn -> {:ok, OverteDirectory.parse_places(@places)} end
+        overte: fn -> {:ok, Directory.parse_places(@places)} end
       }
 
       :ok = Lobby.poll(probes, [@basis])
@@ -195,7 +195,7 @@ defmodule Uro.LobbyTest do
     test "an Overte domain that leaves the directory drops off the list" do
       :ok =
         Lobby.poll(
-          %{basis: silent(), overte: fn -> {:ok, OverteDirectory.parse_places(@places)} end},
+          %{basis: silent(), overte: fn -> {:ok, Directory.parse_places(@places)} end},
           []
         )
 
@@ -208,7 +208,7 @@ defmodule Uro.LobbyTest do
     test "control: an unreachable directory keeps the domains as last seen" do
       :ok =
         Lobby.poll(
-          %{basis: silent(), overte: fn -> {:ok, OverteDirectory.parse_places(@places)} end},
+          %{basis: silent(), overte: fn -> {:ok, Directory.parse_places(@places)} end},
           []
         )
 
@@ -235,7 +235,7 @@ defmodule Uro.LobbyTest do
     test "control: a short list is kept whole" do
       :ok =
         Lobby.poll(
-          %{basis: silent(), overte: fn -> {:ok, OverteDirectory.parse_places(@places)} end},
+          %{basis: silent(), overte: fn -> {:ok, Directory.parse_places(@places)} end},
           [@basis]
         )
 
@@ -247,12 +247,13 @@ defmodule Uro.LobbyTest do
         Lobby.poll(
           %{
             basis: fn _, _ -> {:ok, @answer} end,
-            overte: fn -> {:ok, OverteDirectory.parse_places(@places)} end
+            overte: fn -> {:ok, Directory.parse_places(@places)} end
           },
           [@basis]
         )
 
-      assert %{rows: [[0]]} = Uro.Repo.query!("SELECT count(*) FROM lobby_servers")
+      assert %{rows: [[0]]} =
+               Uro.Repository.Repo.query!("SELECT count(*) FROM lobby_servers")
     end
 
     test "text from other servers is cut to a fixed length" do
@@ -270,7 +271,7 @@ defmodule Uro.LobbyTest do
     end
 
     test "the poll interval is ten minutes" do
-      assert Uro.Lobby.Poller.interval_ms() == 10 * 60 * 1000
+      assert Uro.Transport.Poller.interval_ms() == 10 * 60 * 1000
     end
   end
 

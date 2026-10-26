@@ -1,0 +1,38 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 K. S. Ernest (iFire) Lee
+defmodule Uro.Transport.Web.Controllers.Health do
+  use Uro.Transport.Web, :controller
+
+  alias OpenApiSpex.Schema
+
+  tags(["system"])
+
+  operation(:index,
+    operation_id: "health",
+    summary: "Health",
+    responses: [
+      ok: {
+        "",
+        "application/json",
+        %Schema{
+          type: :object,
+          properties: %{
+            services: %Schema{
+              type: :object,
+              properties: %{
+                uro: %Schema{
+                  type: :string,
+                  enum: ["healthy", "unhealthy"]
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  )
+
+  def index(conn, _params) do
+    json(conn, %{services: %{uro: "healthy"}})
+  end
+end

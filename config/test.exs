@@ -2,7 +2,7 @@
 # Copyright (c) 2026 K. S. Ernest (iFire) Lee
 import Config
 
-config :uro, Uro.Repo,
+config :uro, Uro.Repository.Repo,
   show_sensitive_data_on_connection_error: true,
   database: System.get_env("TEST_DATABASE", Path.expand("../priv/uro_test.db", __DIR__)),
   stacktrace: true,
@@ -13,7 +13,7 @@ config :uro, :webauthn, origin: "https://uro.test", rp_id: "uro.test"
 config :uro, :device_verification_uri, "https://uro.test/device"
 
 # Sessions and sealed second factors need a key base; the server stays off.
-config :uro, Uro.Endpoint,
+config :uro, Uro.Transport.Web.Endpoint,
   server: false,
   secret_key_base: String.duplicate("uro-test-key-base-", 4)
 

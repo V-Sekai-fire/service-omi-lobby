@@ -4,11 +4,11 @@ defmodule Uro.SecondFactorTest do
   import Phoenix.ConnTest
   import Plug.Conn
 
-  alias Uro.Accounts
-  alias Uro.Accounts.TOTP
-  alias Uro.SecondFactor
+  alias Uro.Interactor.Accounts
+  alias Uro.Entities.Accounts.TOTP
+  alias Uro.Interactor.SecondFactor
 
-  @endpoint Uro.Endpoint
+  @endpoint Uro.Transport.Web.Endpoint
   @password "correct horse battery"
   @now 1_900_000_000
 

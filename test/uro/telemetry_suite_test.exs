@@ -6,7 +6,7 @@ defmodule Uro.TelemetrySuiteTest do
   # are both caught) and an identity one (what reads back is what was sent, and reads repeat).
   use ExUnit.Case, async: false
   require OpenTelemetry.Tracer
-  alias Uro.Telemetry.OTLP
+  alias Uro.Service.Telemetry.OTLP
 
   @moduletag :suite
   @moduletag timeout: 300_000

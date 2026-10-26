@@ -12,7 +12,9 @@ defmodule Uro.MixProject do
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
-      dialyzer: dialyzer()
+      dialyzer: dialyzer(),
+      name: "Uro",
+      docs: docs()
     ]
   end
 
@@ -25,6 +27,23 @@ defmodule Uro.MixProject do
       plt_file: {:no_warn, "priv/plts/dialyzer.plt"},
       plt_add_apps: [:mix, :ex_unit],
       ignore_warnings: ".dialyzer_ignore.exs"
+    ]
+  end
+
+  # `mix docs` (ExDoc) builds the architecture and inventory from the module docs.
+  defp docs do
+    [
+      main: "Uro",
+      groups_for_modules: [
+        Overview: [Uro, Uro.Inventory],
+        Transport: ~r/^Uro\.Transport/,
+        Contract: ~r/^Uro\.Contract/,
+        Interactor: ~r/^Uro\.Interactor/,
+        Entities: ~r/^Uro\.Entities/,
+        Repository: ~r/^Uro\.Repository/,
+        Datasource: ~r/^Uro\.Datasource/,
+        Service: ~r/^Uro\.Service/
+      ]
     ]
   end
 
@@ -70,6 +89,7 @@ defmodule Uro.MixProject do
       {:phoenix_html, "~> 3.3"},
       {:cors_plug, "~> 3.0"},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.34", only: :dev, runtime: false},
       {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
       {:gettext, "~> 0.18"},
       {:httpoison, "~> 2.0"},

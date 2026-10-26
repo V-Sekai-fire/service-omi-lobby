@@ -1,6 +1,6 @@
 # AGENTS.md — service-omi-lobby
 
-Uro, the Phoenix API behind the lobby, plus the Next.js site in `frontend/`. `README.md` says what the lobby is for; `docs/inventory.md` lists what is kept and what was removed.
+Uro, the Phoenix API behind the lobby, plus the Next.js site in `frontend/`. `README.md` says what the lobby is for; the `Uro.Inventory` module doc lists what is kept and what was removed.
 
 ## Deploy
 
@@ -30,7 +30,7 @@ The TDD arc must be legible in `git log`.
 
 ## Layout
 
-Hexagonal: `lib/uro/{transport,contract,interactor,entities,repository,datasource,service}`. See `docs/architecture.md`. Put new code in the layer it belongs to.
+Hexagonal: `lib/uro/{transport,contract,interactor,entities,repository,datasource,service}`. See the `Uro` module doc (`mix docs`). Put new code in the layer it belongs to.
 
 ## Elixir conventions
 

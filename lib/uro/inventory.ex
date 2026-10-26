@@ -36,7 +36,8 @@ defmodule Uro.Inventory do
   - Admin (`/api/v1/admin`, front-end `/admin`): **Decide**, with accounts.
   - Cloudflare Turnstile (`Uro.Service.Turnstile`): **Decide**, with accounts.
   - ~~Friends, identity proofs (`Uro.UserRelations`)~~ **Unshipped.** `Uro.Interactor.UserIdentities` (OAuth sign-in) stays with accounts.
-  - Front-end pages `/login`, `/sign-up`, `/confirm-email`, `/user/[userId]`, `/download`, `/about`, `/v-sekai`: **Decide**, with accounts. `/download` and `/v-sekai` are V-Sekai pages, not lobby pages.
+  - Front-end pages `/login`, `/sign-up`, `/confirm-email`, `/user/[userId]`: **Decide**, with accounts.
+  - ~~Front-end pages `/download`, `/about`, `/v-sekai`~~ **Unshipped.** They were V-Sekai pages, not lobby pages. The shared-files API behind `/download` stays under Decide.
 
   ### V-Sekai game services
 

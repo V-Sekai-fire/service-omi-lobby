@@ -12,9 +12,7 @@ if (development) {
 }
 
 export const urls = {
-	discord: "https://discord.gg/7BQDHesck8",
-	github: "https://github.com/v-sekai",
-	twitter: "https://twitter.com/vsekaiofficial"
+	discord: "https://discord.gg/Rypf8Kc6CZ"
 };
 
 // Runtime fetch from API

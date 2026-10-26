@@ -15,7 +15,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
 	description: "Your virtual reality platform, on your game engine.",
-	title: "V-Sekai"
+	title: "OMI Lobby"
 };
 
 export default async function RootLayout({

@@ -11,14 +11,14 @@ defmodule Uro.Contributors do
 
   ## Updating the list
 
-  Counts come from the GitHub contributors API, which also counts commits from unlinked
-  e-mail addresses (`anon=1`):
+  The list holds names only, because commit counts go stale. The lobby page
+  (`frontend/src/app/(static)/page.tsx`) and the README show the same people. List the names
+  with the GitHub contributors API, which also returns unlinked e-mail addresses (`anon=1`):
 
   ```sh
-  gh api 'repos/V-Sekai/uro/contributors?per_page=100&anon=1' \
-    --jq '.[] | "\(.login // .name) \(.contributions)"'
+  gh api 'repos/V-Sekai/uro/contributors?per_page=100&anon=1' --jq '.[] | .login // .name'
   ```
 
-  Copy the result into the README table and keep the highest count first.
+  Change the README and the page together.
   """
 end

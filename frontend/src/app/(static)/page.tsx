@@ -73,6 +73,16 @@ function ServerTable({ servers }: { servers: Array<LobbyServer> }) {
 	);
 }
 
+// Wrote Uro and its web front end before this repository; keep in step with the README.
+const contributors = [
+	"SaracenOne",
+	"fire",
+	"lyuma",
+	"ariesclark",
+	"benbot",
+	"dragonhunt02"
+] as const;
+
 export default async function LobbyPage() {
 	const { data, error } = await lobbyServers();
 	const servers = data?.servers ?? [];
@@ -109,6 +119,21 @@ export default async function LobbyPage() {
 					</Section>
 				);
 			})}
+			<Section>
+				<SectionTitle>Contributors</SectionTitle>
+				<p>
+					Uro began as a copy of{" "}
+					<InlineLink href="https://github.com/V-Sekai/uro">V-Sekai/uro</InlineLink>
+					, without its git history. These people wrote it before the copy:
+				</p>
+				<ul className="flex flex-wrap gap-x-4 gap-y-1">
+					{contributors.map((name) => (
+						<li key={name}>
+							<InlineLink href={`https://github.com/${name}`}>{name}</InlineLink>
+						</li>
+					))}
+				</ul>
+			</Section>
 			<Footer />
 		</main>
 	);

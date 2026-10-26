@@ -62,7 +62,7 @@ lib/uro/
   application.ex   the OTP application
 ```
 
-Read `docs/architecture.md` for the details before you add a module.
+Run `mix docs` and open `doc/index.html` for the details before you add a module; the `Uro` module has the layout.
 
 ## Build and run
 

@@ -1,74 +1,41 @@
-# service-omi-lobby
+# service-omi-lobby (tentative name)
 
-![OMI lobby wordmark: the OMI Group's two rings beside OMI in bold type and lobby in light type](docs/omi-lobby-wordmark.png)
+**(..) is a Server Browser to find Spaces on the Open Metaverse**
 
-**Find a metaverse server you can join right now.**
+(..) lists ready-to-join servers. We, the Open Metaverse Interoperability Group, hope this experiment makes spaces easier to find for everyone.
 
-Which space is open, and where do you go to join it?
+This website polls available server IPs for their names, whether it is up, players online and capacity, its address, and its message of the day.
+It lists Basis servers and Overte domains currently, aiming to expand to anything that allows to be self-hosted on individual servers. Through this, discovery of such independent projects can happen without a platform facilitating it.
 
-A lobby for the open metaverse: one page that lists servers you can join now, across platforms. The working name is OMI Lobby; the final name is still open.
+To list a server here, simply submit a PR (see Adding new Servers below) or submit it through this form (link to be added). The lobby can poll any space that has a server address, and it does so every 10 minutes.
 
-## Purpose
+## Adding new Servers
 
-**One page lists the servers that are up.**
-
-Spaces are hard to find across platforms.
-
-OMI Lobby lists ready-to-join metaverse servers. We, the Open Metaverse Interoperability Group, hope this experiment makes spaces easier to find for everyone.
-
-For each server the lobby shows its name, whether it is up, players online and capacity, its address, and its message of the day. It lists Basis servers and Overte domains today, and other platforms can follow.
-
-To list a server here, reach out to the group. The lobby can poll any space that has a server address, and it does so every 10 minutes.
+To add Basis Servers make a PR adding a new line to /config/config.exs below 21 with your server ip. Or submit through our form (link to be added)
+Overte Servers are polled from its public directory, please reach out if you wish to list one independent from that.
 
 ## How it works
 
 **Uro polls every listed server every 10 minutes, and the site shows the list.**
 
-Where does the list come from, and where does it live?
-
-- Uro, the Phoenix API in this repository, polls every listed server every 10 minutes. Basis servers are the addresses in the `:lobby_basis_servers` setting, each asked for its status directly. Overte domains come from the public Overte directory.
+- Uro, the Phoenix API in this repository, polls every listed server every 10 minutes.
+Specifically:
+Basis servers are the addresses in the `:lobby_basis_servers` setting, each asked for its status directly.
+Overte domains come from the public Overte directory. Requiring no manual listing.
 - Uro holds the list in memory and replaces it whole on each poll, so the list adds nothing to the database. A domain that leaves the Overte directory drops off the list.
-- The Next.js site in `frontend/` shows the list at `/` and counts down to the next poll. It reads the list from `GET /api/v1/lobby/servers` on the server side, so a browser never calls the API.
+- The Next.js site in `frontend/` shows the list at `/` and counts down to the next poll. It reads the list from `GET /api/v1/lobby/servers` on the server side, so a browser never calls the API. This means visitors to the site will never poll any listed server directly.
 
-To run it yourself, follow Build and run below.
+To run it yourself, please follow the Build and Run section below.
 
 ## Companion tray app
 
-**Put the lobby in your taskbar.**
+The Companion tray allows to browse this server list from your desktop without requiring to open the webpage.
 
-Want the list without opening the page?
+[interactor-omi-lobby-tray](https://github.com/V-Sekai-fire/interactor-omi-lobby-tray) puts the lobby in the Windows taskbar. Its tray icon reads `GET /api/v1/lobby/servers` every 10 minutes and lists Basis and Overte Servers that are up. Picking a Basis server copies its address to paste into a Client built with Basis to join, picking an Overte address opens it in Overte through `hifi://` to join via Overte directly.
 
-[interactor-omi-lobby-tray](https://github.com/V-Sekai-fire/interactor-omi-lobby-tray) puts the lobby in the taskbar. Its tray icon reads `GET /api/v1/lobby/servers` every 10 minutes and lists the Overte domains and Basis servers that are up, with players online. Picking an Overte domain opens it in Overte through `hifi://`; picking a Basis server copies its address to paste into Basis.
+The tray app can be found in interactor-omi-lobby-tray to try it.
 
-Open interactor-omi-lobby-tray to try it.
-
-## Code layout
-
-**Seven folders, one for each side of the hexagon.**
-
-Where does a new file go?
-
-Uro follows the Netflix hexagonal layout, with the seven sides named as in the rest of the V-Sekai-fire repos. The Mix project keeps its usual shape: `mix.exs` at the root, code in `lib/`, config in `config/`, migrations in `priv/repo/migrations`, tests in `test/`.
-
-```text
-lib/uro/
-  transport/    Phoenix web (endpoint, router, controllers, plugs) and the lobby poller
-  contract/     behaviours (ServerProbe, ServerDirectory) and the OpenAPI specification
-  interactor/   Lobby, Accounts, Passkeys, SecondFactor, DeviceGrant, SharedContent, ...
-  entities/     Ecto schemas, Lobby.Server and pure support code
-  repository/   the SQLite repo
-  datasource/   the Basis UDP query and the Overte directory client
-  service/      mail, Turnstile, tokens, uploads, telemetry, the Pow cache
-  application.ex   the OTP application
-```
-
-Run `mix docs` and open `doc/index.html` for the details before you add a module; the `Uro` module has the layout.
-
-## Build and run
-
-**Two commands start Uro and the site.**
-
-Want the lobby on your own machine?
+## Build and Run
 
 Run Uro with its development database in a local file:
 
@@ -78,9 +45,9 @@ mix deps.get && mix ecto.setup && mix phx.server
 
 Run the site with `pnpm install && pnpm dev` in `frontend/`.
 
-`fly/` holds the Fly.io deploy: `fly/api` for Uro, with no public address, and `fly/web` for the site.
+`fly/` holds the Fly.io deploy: `fly/api` for Uro, with no public address, fly/web` holds the site.
 
-Run both, then open the site.
+Run both, then open the website.
 
 ## Contributors
 
@@ -99,4 +66,4 @@ Dependabot also committed upstream. Work in this repository: [fire](https://gith
 
 ## Licence
 
-MIT. See `LICENSE`. The rings are copied from the logo of the [Open Metaverse Interoperability Group](https://omigroup.org/).
+MIT. See `LICENSE`.

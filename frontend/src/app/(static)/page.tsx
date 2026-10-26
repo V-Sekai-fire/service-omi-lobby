@@ -1,7 +1,6 @@
 import { lobbyServers } from "~/api";
 import { InlineLink } from "~/components/link";
 
-import { Footer } from "../footer";
 
 import { RefreshRing } from "./refresh-ring";
 import { Section, SectionTitle } from "./section";
@@ -141,7 +140,6 @@ export default async function LobbyPage() {
 					.
 				</p>
 			</Section>
-			<Footer />
 		</main>
 	);
 }

@@ -34,11 +34,11 @@ To run it yourself, follow Build and run below.
 
 ## Companion tray app
 
-**Put the lobby in your Windows taskbar.**
+**Put the lobby in your taskbar.**
 
 Want the list without opening the page?
 
-[interactor-omi-lobby-tray](https://github.com/V-Sekai-fire/interactor-omi-lobby-tray) puts the lobby in the Windows taskbar. Its tray icon reads `GET /api/v1/lobby/servers` every 10 minutes and lists the Overte domains and Basis servers that are up, with players online. Picking an Overte domain opens it in Overte through `hifi://`; picking a Basis server copies its address to paste into Basis.
+[interactor-omi-lobby-tray](https://github.com/V-Sekai-fire/interactor-omi-lobby-tray) puts the lobby in the taskbar. Its tray icon reads `GET /api/v1/lobby/servers` every 10 minutes and lists the Overte domains and Basis servers that are up, with players online. Picking an Overte domain opens it in Overte through `hifi://`; picking a Basis server copies its address to paste into Basis.
 
 Open interactor-omi-lobby-tray to try it.
 

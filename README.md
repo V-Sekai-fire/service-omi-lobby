@@ -1,6 +1,6 @@
 # service-omi-lobby
 
-![OMI Lobby logo: a stack of three servers inside a dashed purple ring; filled green lights and a thick ring mean players are online, hollow lights and a thin ring mean nobody is](docs/omi-lobby-logo.png)
+![OMI lobby wordmark: the OMI Group's two rings beside OMI in bold type and lobby in light type](docs/omi-lobby-wordmark.png)
 
 **Find a metaverse server you can join right now.**
 
@@ -99,4 +99,4 @@ Dependabot also committed upstream. Work in this repository: [fire](https://gith
 
 ## Licence
 
-MIT. See `LICENSE`.
+MIT. See `LICENSE`. The rings are copied from the logo of the [Open Metaverse Interoperability Group](https://omigroup.org/).

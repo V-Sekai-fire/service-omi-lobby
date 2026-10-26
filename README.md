@@ -82,6 +82,21 @@ Run the site with `pnpm install && pnpm dev` in `frontend/`.
 
 Run both, then open the site.
 
+## Contributors
+
+**Uro began as a copy of V-Sekai/uro.**
+
+`git log` here shows only later work. These people wrote Uro and its web front end before the copy ([V-Sekai/uro](https://github.com/V-Sekai/uro)):
+
+- [SaracenOne](https://github.com/SaracenOne)
+- [fire](https://github.com/fire)
+- [lyuma](https://github.com/lyuma)
+- [ariesclark](https://github.com/ariesclark)
+- [benbot](https://github.com/benbot)
+- [dragonhunt02](https://github.com/dragonhunt02)
+
+Dependabot also committed upstream. Work in this repository: [fire](https://github.com/fire). The lobby is an experiment of the [Open Metaverse Interoperability Group](https://omigroup.org/). The lobby page lists the same people; `Uro.Contributors` in `mix docs` says how to update both.
+
 ## Licence
 
 MIT. See `LICENSE`.

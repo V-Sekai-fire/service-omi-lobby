@@ -35,7 +35,7 @@ defmodule Uro.MixProject do
     [
       main: "Uro",
       groups_for_modules: [
-        Overview: [Uro, Uro.Inventory],
+        Overview: [Uro, Uro.Inventory, Uro.Contributors],
         Transport: ~r/^Uro\.Transport/,
         Contract: ~r/^Uro\.Contract/,
         Interactor: ~r/^Uro\.Interactor/,

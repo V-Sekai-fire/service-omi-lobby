@@ -82,6 +82,21 @@ Run the site with `pnpm install && pnpm dev` in `frontend/`.
 
 Run both, then open the site.
 
+## Contributors
+
+**Uro began as a copy of V-Sekai/uro, without its git history.**
+
+`git log` here shows only later work. These people wrote Uro and its web front end before the copy ([V-Sekai/uro](https://github.com/V-Sekai/uro)):
+
+- [SaracenOne](https://github.com/SaracenOne): 134 commits
+- [fire](https://github.com/fire): 42 commits
+- [lyuma](https://github.com/lyuma): 39 commits
+- [ariesclark](https://github.com/ariesclark): 14 commits
+- [benbot](https://github.com/benbot): 9 commits
+- [dragonhunt02](https://github.com/dragonhunt02): 7 commits
+
+Dependabot made 11 further commits upstream. Work in this repository: [fire](https://github.com/fire). `Uro.Contributors` in `mix docs` says how to update the counts.
+
 ## Licence
 
 MIT. See `LICENSE`.

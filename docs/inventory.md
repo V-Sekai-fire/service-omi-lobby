@@ -54,5 +54,5 @@ None of these served the lobby; all are removed.
 - `.github/workflows/offline.yml`, `tools/offline`: runs Uro and the VictoriaMetrics suite with no route out. **Decide.**
 - OpenTelemetry export (`opentelemetry*`, `Uro.Telemetry`): **Decide.** It goes with the offline check.
 - ~~`.github/workflows/build-image.yml`, root `Dockerfile`, `docker-compose.yml`, `Caddyfile`, Burrito release: the old zone backend's image and stack~~ **Unshipped.** The Fly deploy uses `fly/` instead.
-- `docs/decisions`: decision records from the zone backend. **Decide.**
+- ~~`docs/decisions`: decision records from the zone backend~~ **Unshipped.** They were V-Sekai RFD records, and the lobby moves to the Open Metaverse Interoperability Group.
 - ~~`AGENTS.md` sections on the zone backend's deploy, asset cycles and PoC runbook~~ **Unshipped.** The rest is agent guidance for this repo.
